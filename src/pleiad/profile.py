@@ -43,3 +43,24 @@ def outline_profile(image_array, flip = False):
 
 	return profile
 	
+def bridge_profile(profile):
+	"""
+	Removes the breaks in profile and makes it continuous
+	"""
+	
+	flag = 0
+	previous, next = -1, -1
+	
+	for x in range(len(profile)):
+		
+		if flag == 0:
+			if profile(x) == 0:
+				flag = 1
+				previous = x - 1
+		if flag == 1:
+			if profile(x) != 0:
+				flag = 0
+				next = x
+				profile[previous, next] = np.linspace(previous, next, next - previous + 1)
+				
+	return profile
