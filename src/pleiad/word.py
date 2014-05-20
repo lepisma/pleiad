@@ -23,7 +23,13 @@ class Word:
 		Converts scale from 0..255 to 0..1
 		"""
 		
-		# trimmed_image_array = trim
+		columns = image_array.shape[1]
+		
+		lower_limit = int(columns * (trim / 100.))
+		upper_limit = columns - lower_limit
+		
+		trimmed_image_array = image_array.T[lower_limit:upper_limit].T
 		
 		image = trimmed_image_array / 255
+		
 		return image
