@@ -13,7 +13,11 @@ def profiles(image_array):
 	upper = outline_profile(image_array)
 	lower = outline_profile(image_array, flip = True)
 	
-	return [upper, lower, average]
+	profiles = [upper, lower, average]
+	
+	profiles = map(bridge_profile, profiles)
+	
+	return profiles
 	
 def outline_profile(image_array, flip = False):
 	"""
