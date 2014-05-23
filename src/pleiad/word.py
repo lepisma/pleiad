@@ -10,13 +10,14 @@ class Word:
 	Word class
 	"""
 	
-	def __init__(self, image_array, trim = 0, thresh = 127):
+	def __init__(self, image_array, word = False, trim = 0, thresh = 127):
 		"""
 		Takes image (single channel) in the form of numpy array
 		"""
 		
 		self.image = self.binarize(image_array, trim, thresh)
 		self.profiles = profile(self.image)
+		self.word = word
 		
 	def binarize(self, image_array, trim, thresh)
 		"""
