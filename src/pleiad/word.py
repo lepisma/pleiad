@@ -18,6 +18,7 @@ class Word:
 		self.image = self.binarize(image, trim, thresh)
 		self.profiles = profiles(self.image)
 		self.word = word
+		self.shape = image.shape
 		
 	def binarize(self, image, trim, thresh):
 		"""

@@ -12,9 +12,10 @@ class PleiadClassifier:
 	Instantiate and feed words to train
 	"""
 	
-	def __init__(self):
+	def __init__(self, shape):
 		self.word_nodes = [] # Words that it can classify
 		self.parameters_weightage = np.array([1, 1, 1])
+		self.shape = shape
 	
 	def train(self, training_data):
 		"""
@@ -32,6 +33,8 @@ class PleiadClassifier:
 
 		# Create grouped lists
 		for word in training_data:
+			if word.shape != self.shape:
+				continue
 			try:
 				index = word_list.index(word.word)
 			except ValueError:
@@ -61,7 +64,6 @@ class PleiadClassifier:
 			else:
 				# Word already in classifier, updating
 				self.word_nodes[index].update_parameters(num_data_list[i], training_data_list[i] / num_data_list[i])
-				
 		
 	def predict(self, test_word):
 		"""
@@ -69,6 +71,10 @@ class PleiadClassifier:
 		input:
 			test_word: word to be classified
 		"""
+
+		if test_word.shape != self.shape:
+			return -1
+
 		distances_all = []
 		for word in self.word_nodes:
 			distances_all.append(word.find_distance(test_word))
