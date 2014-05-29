@@ -1,15 +1,28 @@
 """
-DTW distance estimation
-"""
+DTW distance calculation
+------------------------
 
-import numpy as np
+- calculate_distance	Distance between two series using R's dtw library
+"""
 
 import rpy2.robjects.numpy2ri
 from rpy2.robjects.packages import importr
 
 def calculate_distance(series_a, series_b):
 	"""
-	Returns the distance (closeness) between two numy series using R's dtw package
+	Returns the distance (closeness) between two numpy series using R's dtw package
+
+	Parameters
+	----------
+	series_a : numpy.ndarray
+		Series of data
+	series_b : numpy.ndarray
+		Second series of data, order doesn't matter
+
+	Returns
+	-------
+	dist : float
+		DTW distance between both series
 	"""
 	
 	R = rpy2.robjects.r
