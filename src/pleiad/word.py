@@ -16,7 +16,7 @@ class Word:
 		"""
 		
 		self.image = self.binarize(image_array, trim, thresh)
-		self.profiles = profile(self.image)
+		self.profiles = profiles(self.image)
 		self.word = word
 		
 	def binarize(self, image_array, trim, thresh)
