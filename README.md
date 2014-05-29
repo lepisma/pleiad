@@ -5,7 +5,7 @@ Experimental word classifier based on dynamic time warping
 Pleiad helps you identify words in an image.
 Use it when you dont need extensive character recognition and/or dont have much data, and need to identify few pre planned words only.
 
-Pleiad **doesn't** need extensive training data, just a single data for each class (few more for better result) are all you need.
+Pleiad **doesn't** need extensive training data, just a single image for each class (few more for better result) is all you need.
 
 ###Setup
 
