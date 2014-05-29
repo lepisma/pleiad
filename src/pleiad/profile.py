@@ -4,30 +4,28 @@ Profile extractor
 
 import numpy as np
 
-def profiles(image_array):
+def profiles(image):
 	"""
-	Returns [upper, lower, average] profiles of active (dark) pixels
+	Returns upper, lower, average profiles of active (dark) pixels
 	"""
 	
-	average = np.sum(image_array, axis = 0)
-	upper = outline_profile(image_array)
-	lower = outline_profile(image_array, flip = True)
-	
-	profiles = [upper, lower, average]
-	
-	profiles = map(bridge_profile, profiles)
+	average = bridge_profile(np.sum(image, axis = 0))
+	upper = bridge_profile(outline_profile(image))
+	lower = bridge_profile(outline_profile(image, flip = True))
+
+	profiles = np.array([upper, lower, average])
 	
 	return profiles
 	
-def outline_profile(image_array, flip = False):
+def outline_profile(image, flip = False):
 	"""
 	Returns outline of the image from top (flip = False) or bottom (flip = True)
 	"""
 	
-	if flip = True:
-		image_array = np.flipud(image_array)
+	if flip == True:
+		image = np.flipud(image_array)
 	
-	rows, columns = image_array.shape
+	rows, columns = image.shape
 	
 	profile = [0 for x in range(columns)]
 
@@ -36,7 +34,7 @@ def outline_profile(image_array, flip = False):
 		flag = 0
 		for row_number in range(rows):
 			# Check for presence of data
-			if image_array[row_number][col_number] == 0:
+			if image[row_number][col_number] == 0:
 				flag += 1
 				# Searching for three continous active pixels
 				if flag == 3:
